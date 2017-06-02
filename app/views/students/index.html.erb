@@ -1,0 +1,28 @@
+<a href="/students">All</a>
+<a href="/students/0">Josh</a>
+<a href="/students/1">Andrew</a>
+<a href="/students/2">Eli</a>
+<a href="/students/3">Laura</a>
+
+<table> 
+  <% @students.each do |student|%>
+    <tr>
+      <th>
+        <%= image_tag(
+          student.image_url, 
+          :alt => "#{student.name}'s picture",
+          :class => "student-pic"
+        ) %>
+        <div class="student-info">
+          <div>
+            <span class="label">Name: </span> <%= student.name %>
+          </div>
+          <div>
+            <span class="label">Cohort: </span><%= student.cohort %>
+          </div>
+        </div>
+      </th>
+      <th><%= student.github_squares.html_safe %></th>
+    </tr>
+  <%end%>
+</table>

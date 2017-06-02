@@ -1,3 +1,23 @@
 // Place all the styles related to the Students controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: sans-serif;
+  font-weight: normal;
+}
+.student-pic {
+  width: 150px;
+  height: 225px;
+}
+
+table {
+  padding: 20px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// tr {
+//   padding: 20px;
+// }

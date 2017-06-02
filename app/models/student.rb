@@ -16,12 +16,15 @@
 
 class Student < ApplicationRecord
     validates :name, :email, :cohort, :coach, presence: true
+    validates :email, uniqueness: true
 
     enum cohort: [  
-        :May2016,
-        :July2016,
-        :September2016,
-        :November2016,
+        'May 2016',
+        'July 2016',
+        'September 2016',
+        'November 2016',
+        'January 2017',
+        'March 2017'
     ]
 
     enum coach: [
