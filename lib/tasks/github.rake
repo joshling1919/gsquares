@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'byebug'
 
 namespace :github do 
   desc "Get update of Students' green squares" 

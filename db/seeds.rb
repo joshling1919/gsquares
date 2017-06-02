@@ -1,4 +1,3 @@
-require 'byebug'
 require 'csv'
 
 CSV.foreach('./db/seeds_data.csv') do |row|
