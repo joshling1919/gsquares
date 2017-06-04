@@ -1,25 +1,31 @@
 class StudentsController < ApplicationController
     def index
-      @students = Student.all
+      @students = Student.all.order(:cohort)
     end
 
     def josh 
-      @students = Student.where(coach: 0)
+      @students = filter_coach(0)
       render :index
     end 
 
     def andrew 
-      @students = Student.where(coach: 1)
+      @students = filter_coach(0)
       render :index
     end
     
     def eli 
-      @students = Student.where(coach: 2)
+      @students = filter_coach(2)
       render :index
     end
     
     def laura
-      @students = Student.where(coach: 3)
+      @students = filter_coach(3)
       render :index
+    end
+
+    private
+
+    def filter_coach(coach_id)
+      Student.where(coach: coach_id).order(:cohort)
     end
 end

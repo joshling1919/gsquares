@@ -20,6 +20,6 @@ namespace :github do
           end
         end    
 		end
-    puts "Students' github squares update!"
+    puts "Students' github squares updated!"
   end
 end
