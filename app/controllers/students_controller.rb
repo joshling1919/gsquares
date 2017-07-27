@@ -23,6 +23,13 @@ class StudentsController < ApplicationController
       render :index
     end
 
+    def destroy
+      Student.find(params[:id]).destroy!
+
+      @students = Student.all.order(:cohort)
+      redirect_to '/'
+    end
+
     private
 
     def filter_coach(coach_id)

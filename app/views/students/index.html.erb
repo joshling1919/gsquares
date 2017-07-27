@@ -20,9 +20,19 @@
           <div>
             <span class="label">Cohort: </span><%= student.cohort %>
           </div>
+          <div>
+            <%= button_to "delete", { 
+                :controller => :students, 
+                :action => 'destroy',
+                :id => student.id
+              },
+              :method => :delete
+            %>
+          </div>
         </div>
       </th>
-      <th><%= student.github_squares.html_safe %></th>
+      <% squares = student.github_squares || ""%>
+      <th><%= squares.html_safe %></th>
     </tr>
   <%end%>
 </table>
