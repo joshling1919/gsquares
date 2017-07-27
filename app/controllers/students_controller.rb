@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
       Student.find(params[:id]).destroy!
 
       @students = Student.all.order(:cohort)
-      redirect_to '/0'
+      redirect_to '/'
     end
 
     private
