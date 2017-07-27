@@ -24,7 +24,8 @@ class Student < ApplicationRecord
         'September 2016',
         'November 2016',
         'January 2017',
-        'March 2017'
+        'March 2017',
+        'May 2017'
     ]
 
     enum coach: [
