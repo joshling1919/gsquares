@@ -1,24 +1,15 @@
-# README
+# GSquares
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Adding new students
+In order to auto add new students:
 
-Things you may want to cover:
+1. Install chromedriver by running `brew install chrome driver`
+2. Run the student update rake task: `rake update:students`
+3. Copy the contents of `final.csv` into `seeds_data.csv` 
+4. Push to heroku and run `heroku run rake db:seed`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Things to keep in mind:
+* Before updating students, add the new cohort enum in student model.
+* Update the student update rake task to reflect the new cohort.
+* If there is a previous `final.csv` delete it before running student update.
+* After seeding heroku, run `heroku run rake github:update` to fetch green squares.
