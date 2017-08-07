@@ -1,4 +1,5 @@
 require 'watir'
+require 'watir/wait'
 
 # This rake task does not interact with the gsquares app.
 # It is used to automate the picture uploading process for Progress Tracker.
@@ -29,17 +30,29 @@ namespace :pics do
       name = file[0, name_i].split('_').map(&:capitalize).join(' ')
 
       search.set name 
-      browser.send_keys :enter
-      if search.exists?
+
+      search_results = browser.lis(class: 'show')
+      if search_results.count == 0
+        error_students << name
+      elsif search_results.count > 0
+        if search_results.count > 1
+          # In this case, the user has to manually choose the 
+          # correct student in order for the rest of the script
+          # to continue running. The Watir timer will wait 5000
+          # seconds for the user (over an hour).
+          Watir::Wait.while(5000) { browser.lis(class: 'show').count > 0 }
+        else
+          browser.send_keys :enter
+        end
         browser.a(class: 'button', text: 'Edit Student').click 
         rel_path = 'lib/pics/' + file
         abs_path = File.absolute_path(rel_path)
         browser.file_field(id: 'student_avatar', type: 'file').set(abs_path)
         browser.button(text: 'Submit').click
       else 
-        error_students << name
-        browser.back                  
+        # browser.send_keys :enter
       end
+
     end
 
     puts "Uploaded Pictures!"
