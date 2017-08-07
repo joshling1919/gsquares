@@ -24,10 +24,13 @@ class StudentsController < ApplicationController
     end
 
     def destroy
-      Student.find(params[:id]).destroy!
-
-      @students = Student.all.order(:cohort)
-      redirect_to '/'
+      @student = Student.find(params[:id])
+      
+      @student.destroy!
+      
+      respond_to do |format|
+        format.js
+      end
     end
 
     private

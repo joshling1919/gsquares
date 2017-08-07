@@ -6,7 +6,7 @@
 
 <table> 
   <% @students.each do |student|%>
-    <tr>
+    <tr id="item-<%= student.id %>">
       <th>
         <%= image_tag(
           student.image_url, 
@@ -26,7 +26,8 @@
                 :action => 'destroy',
                 :id => student.id
               },
-              :method => :delete
+              :method => :delete,
+              :remote => true
             %>
           </div>
         </div>
