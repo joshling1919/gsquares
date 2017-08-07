@@ -32,9 +32,9 @@ namespace :pics do
       search.set name 
 
       search_results = browser.lis(class: 'show')
-      if search_results.count == 0
+      if search_results.count < 1
         error_students << name
-      elsif search_results.count > 0
+      else
         if search_results.count > 1
           # In this case, the user has to manually choose the 
           # correct student in order for the rest of the script
@@ -49,8 +49,6 @@ namespace :pics do
         abs_path = File.absolute_path(rel_path)
         browser.file_field(id: 'student_avatar', type: 'file').set(abs_path)
         browser.button(text: 'Submit').click
-      else 
-        # browser.send_keys :enter
       end
 
     end
