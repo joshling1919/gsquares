@@ -10,21 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602050410) do
+ActiveRecord::Schema.define(version: 20170808000309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "students", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.string   "email",                      null: false
+    t.string   "name",                           null: false
+    t.string   "email",                          null: false
     t.string   "image_url"
     t.string   "github_squares"
     t.integer  "cohort",         default: 0
     t.integer  "coach",          default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "github"
+    t.boolean  "daily_email",    default: false
     t.index ["email"], name: "index_students_on_email", using: :btree
   end
 
