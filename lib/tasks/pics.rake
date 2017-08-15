@@ -23,11 +23,9 @@ namespace :pics do
 
     error_students = []
     Dir.foreach('lib/pics') do |file|
-      next if file == '.' || file == '..'
-      name_length = file.length 
-      name_i = name_length - 5
+      next if file == '.' || file == '..' || file == '.DS_Store'
 
-      name = file[0, name_i].split('_').map(&:capitalize).join(' ')
+      name = file.split(' ')[0, 2].join(' ')
 
       search.set name 
 
@@ -35,15 +33,15 @@ namespace :pics do
       if search_results.count < 1
         error_students << name
       else
-        if search_results.count > 1
-          # In this case, the user has to manually choose the 
-          # correct student in order for the rest of the script
-          # to continue running. The Watir timer will wait 5000
-          # seconds for the user (over an hour).
-          Watir::Wait.while(5000) { browser.lis(class: 'show').count > 0 }
-        else
+        # if search_results.count > 1
+        #   # In this case, the user has to manually choose the 
+        #   # correct student in order for the rest of the script
+        #   # to continue running. The Watir timer will wait 5000
+        #   # seconds for the user (over an hour).
+        #   Watir::Wait.while(5000) { browser.lis(class: 'show').count > 0 }
+        # else
           browser.send_keys :enter
-        end
+        # end
         browser.a(class: 'button', text: 'Edit Student').click 
         rel_path = 'lib/pics/' + file
         abs_path = File.absolute_path(rel_path)

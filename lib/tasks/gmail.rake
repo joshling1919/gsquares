@@ -44,12 +44,14 @@ namespace :gmail do
     prev_day = "#{prev_day.year}/#{prev_day.month}/#{prev_day.day}"
 
     user_id = 'me'
+
+    missing_email_students = []
     Student.where(daily_email: true).each do |student|
       query= "from:#{student.email} after:#{prev_day}"
       result = service.list_user_messages(user_id, q: query)
       emailed_today = false 
 
-      if result.messages.length > 0
+      if result.messages && result.messages.length > 0
         result.messages.each do |message|
           message_time = service.get_user_message('me', "15dbd76e73f779d1").payload.headers[18].value.to_datetime
           prev_time = Time.zone.now - 16.hours
@@ -61,9 +63,12 @@ namespace :gmail do
       end
 
       unless emailed_today 
+        missing_email_students << student
         puts "Notify that this student didn't email today"
       end
 
     end
+
+    MeMailer.notify_email(missing_email_students).deliver
   end
 end
